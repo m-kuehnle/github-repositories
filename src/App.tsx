@@ -28,8 +28,11 @@ interface Repo {
 function App() {
   const [userName, setUserName] = useState("");
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [originalRepos, setOriginalRepos] = useState<Repo[] | null>(null);
   const [repos, setRepos] = useState<Repo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [filter_name, setFilterName] = useState("");
+  const [filter_language, setFilterLanguage] = useState("");
 
   const fetchData = async () => {
     setError(null);
@@ -50,10 +53,31 @@ function App() {
 
       const repoRes = await fetch(userProfile.repos_url);
       const repoData = await repoRes.json();
+      setOriginalRepos(repoData);
       setRepos(repoData);
     } catch (error) {
       setError("User not found. Please try again");
     }
+  };
+
+  const filterRepos = (name?: string, language?: string) => {
+    let filteredRepos = originalRepos || [];
+
+    if (name && name.trim() !== "") {
+      filteredRepos = filteredRepos.filter((repo) =>
+        repo.name.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+
+    if (language && language.trim() !== "") {
+      filteredRepos = filteredRepos.filter((repo) =>
+        repo.language
+          ? repo.language.toLowerCase().includes(language.toLowerCase())
+          : false
+      );
+    }
+
+    setRepos(filteredRepos);
   };
 
   return (
@@ -92,13 +116,39 @@ function App() {
         </div>
       )}
 
+      {/* Filter Repositories */}
+      <div className="flex">
+        {originalRepos && (
+          <Input
+            type="text"
+            placeholder="Filter by Name"
+            value={filter_name}
+            onChange={(e) => {
+              setFilterName(e.target.value);
+              filterRepos(e.target.value, filter_language);
+            }}
+          />
+        )}
+        {originalRepos && (
+          <Input
+            type="text"
+            placeholder="Filter by Language"
+            value={filter_language}
+            onChange={(e) => {
+              setFilterLanguage(e.target.value);
+              filterRepos(filter_name, e.target.value);
+            }}
+          />
+        )}
+      </div>
+
       {/* User Repositories */}
       {repos && (
         <Table>
           <TableCaption>Public Repositories.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="">Repository Name</TableHead>
+              <TableHead>Repository Name</TableHead>
               <TableHead>Language</TableHead>
             </TableRow>
           </TableHeader>
