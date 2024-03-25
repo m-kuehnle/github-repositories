@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import {
   Table,
@@ -15,8 +16,8 @@ import {
   TableFooter,
 } from "@/components/ui/table";
 import "./App.css";
-import { count } from "console";
 import { ModeToggle } from "./components/mode-toggle";
+import { Terminal } from "lucide-react";
 
 interface UserProfile {
   login: string;
@@ -49,7 +50,7 @@ function App() {
       const data = await res.json();
 
       if (data.items.length === 0) {
-        setError("User not found. Please try again.");
+        setError("User not found.");
         return;
       }
 
@@ -61,7 +62,7 @@ function App() {
       setOriginalRepos(repoData);
       setRepos(repoData);
     } catch (error) {
-      setError("User not found. Please try again");
+      setError("User not found.");
     }
   };
 
@@ -98,26 +99,36 @@ function App() {
 
           <div className="default-container">
             <h1 className="my-14 md:text-5xl text-3xl dark:text-white ">
-              Search GitHub User.<br></br> Get{" "}
+              Search GitHub Users.<br></br> Get{" "}
               <span className="bg-gradient-to-r from-[#ede342] to-[#ff51eb] text-transparent bg-clip-text">
                 Repositories
               </span>
               .
             </h1>
-            <div className="flex w-full max-w-sm items-center space-x-2 my-8">
-              <Input
-                type="text"
-                placeholder="Username"
-                className="dark:text-white"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-              <Button type="submit" onClick={fetchData}>
-                Find User
-              </Button>
+            <div>
+              <div className="flex w-full max-w-sm items-center space-x-2 my-8">
+                <Input
+                  type="text"
+                  placeholder="Username"
+                  className="dark:text-white"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <Button type="submit" onClick={fetchData}>
+                  Find User
+                </Button>
+              </div>
+              {/* Display error message if there is an error */}
+              {error && (
+                <Alert className="w-full">
+                  <Terminal className="h-4 w-4" />
+                  <AlertTitle>User not found.</AlertTitle>
+                  <AlertDescription>
+                    Please try again with a valid username.
+                  </AlertDescription>
+                </Alert>
+              )}
             </div>
-            {/* Display error message if there is an error */}
-            {error && <p className=" text-slate-500">{error}</p>}
 
             {/* User Profile */}
             {profile && (
