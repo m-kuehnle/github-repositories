@@ -38,7 +38,7 @@ function App() {
               onProfileChange={handleProfileChange}
               onReposChange={handleReposChange}
             />
-            {profile && <Profile profile={profile} />}
+            <Profile profile={profile} />
             {profile && <Repositories profile={profile} repos={repos} />}
           </div>
         </div>

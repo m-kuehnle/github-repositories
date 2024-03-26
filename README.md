@@ -1,3 +1,4 @@
+
 # List GitHub Repositories of any User
 
 The GitHub User Repository Finder is a web application that allows you to search for any GitHub user and list out all of their public repositories. With this app, you can easily explore the repositories of any GitHub user, filter them by name and programming language, and find the projects you're interested in quickly.
@@ -46,4 +47,25 @@ Start the development server
 **Client:** Vite, React, Typescript, TailwindCSS
 
 **Server:** Node
+
+
+## Running Unit Tests
+
+To run unit tests, run the following command
+
+```bash
+  npm run test
+```
+
+
+## Demo
+
+Use the application live at https://github-repos.kuehnle.me
+
+
+## Future Improvements
+
+- Implement automatic filtering based on the programming languages used in repositories
+
+- Increase test coverage by adding additional test cases
 

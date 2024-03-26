@@ -57,7 +57,11 @@ const SearchUser = ({ onProfileChange, onReposChange }: Props) => {
           placeholder="Username"
           className="dark:text-white"
           value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => {
+            setUserName(e.target.value);
+            // Clear error message when input changes
+            setError(null);
+          }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               fetchData(userName);
