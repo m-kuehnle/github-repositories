@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import SearchUser, { Repo, UserProfile } from "./SearchUser";
+import SearchUser from "./SearchUser";
 import {
   fireEvent,
   render,
@@ -10,43 +10,19 @@ import {
 
 describe("#SearchUser", () => {
   it("shows username input field", async () => {
-    const mockOnProfileChange = (newProfile: UserProfile | null) => {};
-    const mockOnReposChange = (newRepos: Repo[] | null) => {};
-
-    render(
-      <SearchUser
-        onProfileChange={mockOnProfileChange}
-        onReposChange={mockOnReposChange}
-      />
-    );
+    render(<SearchUser onProfileChange={() => {}} onReposChange={() => {}} />);
 
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 
   it("show find user button", async () => {
-    const mockOnProfileChange = (newProfile: UserProfile | null) => {};
-    const mockOnReposChange = (newRepos: Repo[] | null) => {};
-
-    render(
-      <SearchUser
-        onProfileChange={mockOnProfileChange}
-        onReposChange={mockOnReposChange}
-      />
-    );
+    render(<SearchUser onProfileChange={() => {}} onReposChange={() => {}} />);
     userEvent.click(screen.getByRole("button"));
     expect(await screen.findByText(/Find User/)).toBeInTheDocument();
   });
 
   it("displays error message when button is clicked without entering valid username", async () => {
-    const mockOnProfileChange = (newProfile: UserProfile | null) => {};
-    const mockOnReposChange = (newRepos: Repo[] | null) => {};
-
-    render(
-      <SearchUser
-        onProfileChange={mockOnProfileChange}
-        onReposChange={mockOnReposChange}
-      />
-    );
+    render(<SearchUser onProfileChange={() => {}} onReposChange={() => {}} />);
 
     const findUserButton = screen.getByRole("button");
     fireEvent.click(findUserButton);
@@ -57,15 +33,7 @@ describe("#SearchUser", () => {
     });
   });
   it("clears error message when user starts typing in the username field", async () => {
-    const mockOnProfileChange = (newProfile: UserProfile | null) => {};
-    const mockOnReposChange = (newRepos: Repo[] | null) => {};
-
-    render(
-      <SearchUser
-        onProfileChange={mockOnProfileChange}
-        onReposChange={mockOnReposChange}
-      />
-    );
+    render(<SearchUser onProfileChange={() => {}} onReposChange={() => {}} />);
 
     const button = screen.getByRole("button");
     fireEvent.click(button);

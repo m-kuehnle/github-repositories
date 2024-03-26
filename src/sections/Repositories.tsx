@@ -35,11 +35,11 @@ const Repositories: React.FC<ProfileProps> = ({ profile, repos }) => {
   const [filteredRepos, setFilteredRepos] = useState<Repo[] | null>(null);
 
   useEffect(() => {
-    if (!filterName && !filterLanguage) {
-      // Reset filteredRepos when both filters are empty
-      setFilteredRepos(repos);
-    }
-  }, [filterName, filterLanguage, repos]);
+    // Reset filter inputs when repos prop changes
+    setFilterName("");
+    setFilterLanguage("");
+    setFilteredRepos(repos);
+  }, [repos]);
 
   const filterRepos = (name?: string, language?: string) => {
     let filteredRepos = repos || [];

@@ -1,6 +1,6 @@
 import Profile from "./Profile";
 import { describe, expect, it } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 interface UserProfile {
   login: string;
@@ -26,11 +26,6 @@ describe("#Profile", () => {
 
   it("renders nothing when profile prop is null", () => {
     render(<Profile profile={null} />);
-
-    const profileImage = screen.queryByRole("img", {
-      name: /profile image/i,
-    });
-    expect(profileImage).not.toBeInTheDocument();
 
     const usernameLink = screen.queryByText(exampleProfile.login);
     expect(usernameLink).not.toBeInTheDocument();

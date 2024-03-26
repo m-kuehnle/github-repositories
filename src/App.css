@@ -2,20 +2,3 @@
   margin: 0;
   text-align: center;
 }
-
-.default-container {
-  margin-top: 20px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-container {
-  margin-top: 20px;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
