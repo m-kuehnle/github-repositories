@@ -32,7 +32,7 @@ function App() {
       <div className="dark:bg-bg_darkmode min-h-svh">
         <div className="container mx-auto py-4">
           <HeaderBar />
-          <div className="flex flex-col items-center justify-center mt-5 p-5">
+          <div className="flex flex-col items-center justify-center">
             <Hero />
             <SearchUser
               onProfileChange={handleProfileChange}

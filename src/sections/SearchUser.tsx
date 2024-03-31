@@ -50,8 +50,8 @@ const SearchUser = ({ onProfileChange, onReposChange }: Props) => {
   };
 
   return (
-    <div>
-      <div className="flex w-full max-w-sm items-center space-x-2 my-8">
+    <div className="w-full md:max-w-sm">
+      <div className="flex w-full items-center space-x-2 my-2">
         <Input
           type="text"
           placeholder="Username"
