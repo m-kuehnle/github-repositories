@@ -62,9 +62,9 @@ const Repositories: React.FC<ProfileProps> = ({ profile, repos }) => {
   };
 
   return (
-    <>
+    <div className="h-full w-full lg:w-4/6">
       {/* Filter Repositories */}
-      <div className="flex flex-row mt-6 mb-6 justify-start w-full ">
+      <div className="flex flex-row mt-6 mb-6 justify-start w-full">
         {repos && (
           <Input
             type="text"
@@ -93,39 +93,43 @@ const Repositories: React.FC<ProfileProps> = ({ profile, repos }) => {
 
       {/* User Repositories */}
       {filteredRepos && (
-        <Table>
-          <TableCaption>Public repositories of {profile?.login}.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Repository Name</TableHead>
-              <TableHead>Language</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredRepos.map((repo) => (
-              <TableRow key={repo.name}>
-                <TableCell className="text-left dark:text-white">
-                  {repo.name}
+        <div className="min-h-screen">
+          <Table>
+            <TableCaption>
+              Public repositories of {profile?.login}.
+            </TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Repository Name</TableHead>
+                <TableHead>Language</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredRepos.map((repo) => (
+                <TableRow key={repo.name}>
+                  <TableCell className="text-left dark:text-white">
+                    {repo.name}
+                  </TableCell>
+                  <TableCell className="text-left dark:text-white">
+                    {repo.language}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell className="dark:text-slate-400">
+                  Number of Repositories
                 </TableCell>
-                <TableCell className="text-left dark:text-white">
-                  {repo.language}
+                <TableCell className="text-left dark:text-slate-400">
+                  {filteredRepos?.length}
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell className="dark:text-slate-400">
-                Number of Repositories
-              </TableCell>
-              <TableCell className="text-left dark:text-slate-400">
-                {filteredRepos?.length}
-              </TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
+            </TableFooter>
+          </Table>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.18% </span>
+                <span class="strong">93.38% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>123/132</span>
+                <span class='fraction'>127/136</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.18% </span>
+                <span class="strong">93.38% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>123/132</span>
+                <span class='fraction'>127/136</span>
             </div>
         
             
@@ -195,7 +195,11 @@
 <a name='L130'></a><a href='#L130'>130</a>
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -300,6 +304,9 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -308,6 +315,7 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -391,9 +399,9 @@ const Repositories: React.FC&lt;ProfileProps&gt; = ({ profile, repos }) =&gt; {
   };
 &nbsp;
   return (
-    &lt;&gt;
+    &lt;div className="h-full w-full lg:w-4/6"&gt;
       {/* Filter Repositories */}
-      &lt;div className="flex flex-row mt-6 mb-6 justify-start w-full "&gt;
+      &lt;div className="flex flex-row mt-6 mb-6 justify-start w-full"&gt;
         {repos &amp;&amp; (
           &lt;Input
             type="text"
@@ -422,39 +430,43 @@ const Repositories: React.FC&lt;ProfileProps&gt; = ({ profile, repos }) =&gt; {
 &nbsp;
       {/* User Repositories */}
       {filteredRepos &amp;&amp; (
-        &lt;Table&gt;
-          &lt;TableCaption&gt;Public repositories of {profile?.login}.&lt;/TableCaption&gt;
-          &lt;TableHeader&gt;
-            &lt;TableRow&gt;
-              &lt;TableHead&gt;Repository Name&lt;/TableHead&gt;
-              &lt;TableHead&gt;Language&lt;/TableHead&gt;
-            &lt;/TableRow&gt;
-          &lt;/TableHeader&gt;
-          &lt;TableBody&gt;
-            {filteredRepos.map((repo) =&gt; (
-              &lt;TableRow key={repo.name}&gt;
-                &lt;TableCell className="text-left dark:text-white"&gt;
-                  {repo.name}
+        &lt;div className="min-h-screen"&gt;
+          &lt;Table&gt;
+            &lt;TableCaption&gt;
+              Public repositories of {profile?.login}.
+            &lt;/TableCaption&gt;
+            &lt;TableHeader&gt;
+              &lt;TableRow&gt;
+                &lt;TableHead&gt;Repository Name&lt;/TableHead&gt;
+                &lt;TableHead&gt;Language&lt;/TableHead&gt;
+              &lt;/TableRow&gt;
+            &lt;/TableHeader&gt;
+            &lt;TableBody&gt;
+              {filteredRepos.map((repo) =&gt; (
+                &lt;TableRow key={repo.name}&gt;
+                  &lt;TableCell className="text-left dark:text-white"&gt;
+                    {repo.name}
+                  &lt;/TableCell&gt;
+                  &lt;TableCell className="text-left dark:text-white"&gt;
+                    {repo.language}
+                  &lt;/TableCell&gt;
+                &lt;/TableRow&gt;
+              ))}
+            &lt;/TableBody&gt;
+            &lt;TableFooter&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell className="dark:text-slate-400"&gt;
+                  Number of Repositories
                 &lt;/TableCell&gt;
-                &lt;TableCell className="text-left dark:text-white"&gt;
-                  {repo.language}
+                &lt;TableCell className="text-left dark:text-slate-400"&gt;
+                  {filteredRepos?.length}
                 &lt;/TableCell&gt;
               &lt;/TableRow&gt;
-            ))}
-          &lt;/TableBody&gt;
-          &lt;TableFooter&gt;
-            &lt;TableRow&gt;
-              &lt;TableCell className="dark:text-slate-400"&gt;
-                Number of Repositories
-              &lt;/TableCell&gt;
-              &lt;TableCell className="text-left dark:text-slate-400"&gt;
-                {filteredRepos?.length}
-              &lt;/TableCell&gt;
-            &lt;/TableRow&gt;
-          &lt;/TableFooter&gt;
-        &lt;/Table&gt;
+            &lt;/TableFooter&gt;
+          &lt;/Table&gt;
+        &lt;/div&gt;
       )}
-    &lt;/&gt;
+    &lt;/div&gt;
   );
 };
 &nbsp;
@@ -466,7 +478,7 @@ export default Repositories;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-26T13:34:24.460Z
+                at 2024-03-31T16:33:20.556Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
